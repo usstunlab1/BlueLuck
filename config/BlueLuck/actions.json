@@ -1,0 +1,207 @@
+{
+  "maxActions": 300,
+  "actions": [
+    {
+      "name": "announce",
+      "description": "Announce a message to the active server audience.",
+      "category": "message",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [
+        "message"
+      ],
+      "optional": []
+    },
+    {
+      "name": "notification",
+      "description": "Send a notification to the requesting player.",
+      "category": "message",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [
+        "message"
+      ],
+      "optional": []
+    },
+    {
+      "name": "timer.start",
+      "description": "Start a named event timer.",
+      "category": "event",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [
+        "seconds"
+      ],
+      "optional": [
+        "timerId"
+      ]
+    },
+    {
+      "name": "timer.stop",
+      "description": "Stop a named event timer.",
+      "category": "event",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [],
+      "optional": [
+        "timerId"
+      ]
+    },
+    {
+      "name": "score.add",
+      "description": "Add points to a named score.",
+      "category": "score",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [
+        "amount"
+      ],
+      "optional": [
+        "key"
+      ]
+    },
+    {
+      "name": "score.reset",
+      "description": "Reset a named score.",
+      "category": "score",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [],
+      "optional": [
+        "key"
+      ]
+    },
+    {
+      "name": "phase.set",
+      "description": "Set the logical event phase.",
+      "category": "event",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [
+        "phase"
+      ],
+      "optional": []
+    },
+    {
+      "name": "counter.add",
+      "description": "Add to a named event counter.",
+      "category": "event",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [
+        "key",
+        "amount"
+      ],
+      "optional": []
+    },
+    {
+      "name": "condition.check",
+      "description": "Check a simple event-state equality condition.",
+      "category": "logic",
+      "risk": "safe",
+      "requiresApproval": false,
+      "enabled": true,
+      "required": [
+        "key",
+        "equals"
+      ],
+      "optional": []
+    },
+    {
+      "name": "event.complete",
+      "description": "Mark the active event completed.",
+      "category": "event",
+      "risk": "controlled",
+      "requiresApproval": true,
+      "enabled": true,
+      "required": [],
+      "optional": []
+    },
+    {
+      "name": "event.cancel",
+      "description": "Cancel the active event.",
+      "category": "event",
+      "risk": "controlled",
+      "requiresApproval": true,
+      "enabled": true,
+      "required": [],
+      "optional": []
+    },
+    {
+      "name": "spawn.request",
+      "description": "Request an approved native spawn operation.",
+      "category": "spawn",
+      "risk": "controlled",
+      "requiresApproval": true,
+      "enabled": true,
+      "required": [
+        "prefab"
+      ],
+      "optional": [
+        "count",
+        "trackingGroup",
+        "position"
+      ]
+    },
+    {
+      "name": "effect.request",
+      "description": "Request an approved native buff or visual effect.",
+      "category": "effect",
+      "risk": "controlled",
+      "requiresApproval": true,
+      "enabled": true,
+      "required": [
+        "prefab"
+      ],
+      "optional": [
+        "target",
+        "durationSeconds",
+        "trackingGroup"
+      ]
+    },
+    {
+      "name": "zone.radius.set",
+      "description": "Request a logical zone-radius change.",
+      "category": "zone",
+      "risk": "controlled",
+      "requiresApproval": true,
+      "enabled": true,
+      "required": [
+        "radius"
+      ],
+      "optional": []
+    },
+    {
+      "name": "pvp.set",
+      "description": "Request PvP state for the active event.",
+      "category": "player",
+      "risk": "controlled",
+      "requiresApproval": true,
+      "enabled": true,
+      "required": [
+        "enabled"
+      ],
+      "optional": []
+    },
+    {
+      "name": "heal.request",
+      "description": "Request healing for an approved event target.",
+      "category": "player",
+      "risk": "controlled",
+      "requiresApproval": true,
+      "enabled": true,
+      "required": [],
+      "optional": [
+        "target"
+      ]
+    }
+  ]
+}

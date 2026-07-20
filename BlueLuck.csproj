@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <OutputType>Library</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AssemblyName>BlueLuck</AssemblyName>
+    <RootNamespace>BlueLuck</RootNamespace>
+    <Version>0.1.0</Version>
+    <Description>BlueLuck Event - minimal AI-assisted V Rising event framework.</Description>
+    <Authors>BlueLuck Event Contributors</Authors>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VampireReferenceAssemblies" />
+    <PackageReference Include="BepInEx.Core" />
+    <PackageReference Include="BepInEx.Unity.IL2CPP" />
+    <PackageReference Include="BepInEx.Unity.Common" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="config\BlueLuck\**\*.json" />
+    <Content Include="config\BlueLuck\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

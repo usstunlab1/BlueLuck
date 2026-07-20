@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "id": "survival",
+    "displayName": "Survival Waves",
+    "version": "1",
+    "enabled": true,
+    "status": "template"
+  },
+  "rules": {
+    "minPlayers": 1,
+    "maxPlayers": 20,
+    "livesPerPlayer": 3,
+    "durationSeconds": 1200,
+    "zoneRadius": 80
+  },
+  "flows": {
+    "start": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Survival Waves is starting."
+        },
+        "approved": true
+      },
+      {
+        "action": "counter.add",
+        "params": {
+          "key": "wave",
+          "amount": "1"
+        },
+        "approved": true
+      },
+      {
+        "action": "timer.start",
+        "params": {
+          "timerId": "event",
+          "seconds": "1200"
+        },
+        "approved": true
+      }
+    ],
+    "end": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Survival Waves has ended."
+        },
+        "approved": true
+      }
+    ]
+  },
+  "ai": {
+    "enabled": true,
+    "allowConfigEdits": true,
+    "requireApproval": true,
+    "editableFields": [
+      "rules.durationSeconds",
+      "rules.livesPerPlayer",
+      "rules.zoneRadius"
+    ],
+    "allowedActions": [
+      "announce",
+      "notification",
+      "timer.start",
+      "timer.stop",
+      "counter.add",
+      "spawn.request",
+      "effect.request",
+      "heal.request",
+      "event.complete"
+    ],
+    "prompt": "Plan controlled enemy waves and small difficulty adjustments."
+  }
+}

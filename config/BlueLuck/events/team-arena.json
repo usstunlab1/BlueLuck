@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "id": "team-arena",
+    "displayName": "Team Arena",
+    "version": "1",
+    "enabled": true,
+    "status": "template"
+  },
+  "rules": {
+    "minPlayers": 4,
+    "maxPlayers": 20,
+    "livesPerPlayer": 5,
+    "durationSeconds": 900,
+    "zoneRadius": 85
+  },
+  "flows": {
+    "start": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Team Arena is starting."
+        },
+        "approved": true
+      },
+      {
+        "action": "phase.set",
+        "params": {
+          "phase": "team_setup"
+        },
+        "approved": true
+      },
+      {
+        "action": "timer.start",
+        "params": {
+          "timerId": "match",
+          "seconds": "900"
+        },
+        "approved": true
+      }
+    ],
+    "end": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Team Arena has ended."
+        },
+        "approved": true
+      }
+    ]
+  },
+  "ai": {
+    "enabled": true,
+    "allowConfigEdits": true,
+    "requireApproval": true,
+    "editableFields": [
+      "rules.durationSeconds",
+      "rules.livesPerPlayer",
+      "rules.zoneRadius"
+    ],
+    "allowedActions": [
+      "announce",
+      "notification",
+      "timer.start",
+      "timer.stop",
+      "score.add",
+      "score.reset",
+      "phase.set",
+      "effect.request",
+      "zone.radius.set",
+      "pvp.set"
+    ],
+    "prompt": "Manage two-team scoring and small approved arena changes."
+  }
+}

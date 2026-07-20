@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "id": "ai-sandbox",
+    "displayName": "AI Event Sandbox",
+    "version": "1",
+    "enabled": true,
+    "status": "template"
+  },
+  "rules": {
+    "minPlayers": 1,
+    "maxPlayers": 8,
+    "livesPerPlayer": 3,
+    "durationSeconds": 600,
+    "zoneRadius": 50
+  },
+  "flows": {
+    "start": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "AI Event Sandbox is ready for approved plans."
+        },
+        "approved": true
+      },
+      {
+        "action": "phase.set",
+        "params": {
+          "phase": "sandbox"
+        },
+        "approved": true
+      }
+    ],
+    "end": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "AI Event Sandbox has ended."
+        },
+        "approved": true
+      }
+    ]
+  },
+  "ai": {
+    "enabled": true,
+    "allowConfigEdits": true,
+    "requireApproval": true,
+    "editableFields": [
+      "rules.durationSeconds",
+      "rules.livesPerPlayer",
+      "rules.zoneRadius"
+    ],
+    "allowedActions": [
+      "announce",
+      "notification",
+      "timer.start",
+      "timer.stop",
+      "score.add",
+      "score.reset",
+      "phase.set",
+      "counter.add",
+      "condition.check",
+      "event.complete",
+      "event.cancel",
+      "spawn.request",
+      "effect.request",
+      "zone.radius.set",
+      "pvp.set",
+      "heal.request"
+    ],
+    "prompt": "Return structured plans using only allowedActions. Controlled actions require explicit approval."
+  }
+}

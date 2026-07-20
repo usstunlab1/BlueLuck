@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "id": "bloodbath",
+    "displayName": "Bloodbath",
+    "version": "1",
+    "enabled": true,
+    "status": "template"
+  },
+  "rules": {
+    "minPlayers": 2,
+    "maxPlayers": 20,
+    "livesPerPlayer": 3,
+    "durationSeconds": 900,
+    "zoneRadius": 100
+  },
+  "flows": {
+    "start": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Bloodbath is starting. Three lives. Last player standing wins."
+        },
+        "approved": true
+      },
+      {
+        "action": "phase.set",
+        "params": {
+          "phase": "warmup"
+        },
+        "approved": true
+      },
+      {
+        "action": "timer.start",
+        "params": {
+          "timerId": "match",
+          "seconds": "900"
+        },
+        "approved": true
+      }
+    ],
+    "end": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Bloodbath has ended."
+        },
+        "approved": true
+      }
+    ]
+  },
+  "ai": {
+    "enabled": true,
+    "allowConfigEdits": true,
+    "requireApproval": true,
+    "editableFields": [
+      "rules.durationSeconds",
+      "rules.livesPerPlayer",
+      "rules.zoneRadius"
+    ],
+    "allowedActions": [
+      "announce",
+      "notification",
+      "timer.start",
+      "timer.stop",
+      "score.add",
+      "phase.set",
+      "spawn.request",
+      "effect.request",
+      "zone.radius.set",
+      "pvp.set",
+      "heal.request"
+    ],
+    "prompt": "Operate Bloodbath with small approved changes. Never invent actions or bypass approval."
+  }
+}

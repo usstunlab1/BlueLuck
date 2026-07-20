@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "id": "colosseum",
+    "displayName": "Colosseum",
+    "version": "1",
+    "enabled": true,
+    "status": "template"
+  },
+  "rules": {
+    "minPlayers": 2,
+    "maxPlayers": 16,
+    "livesPerPlayer": 5,
+    "durationSeconds": 720,
+    "zoneRadius": 70
+  },
+  "flows": {
+    "start": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "The Colosseum match is starting."
+        },
+        "approved": true
+      },
+      {
+        "action": "phase.set",
+        "params": {
+          "phase": "round_one"
+        },
+        "approved": true
+      },
+      {
+        "action": "timer.start",
+        "params": {
+          "timerId": "match",
+          "seconds": "720"
+        },
+        "approved": true
+      }
+    ],
+    "end": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Colosseum has ended."
+        },
+        "approved": true
+      }
+    ]
+  },
+  "ai": {
+    "enabled": true,
+    "allowConfigEdits": true,
+    "requireApproval": true,
+    "editableFields": [
+      "rules.durationSeconds",
+      "rules.livesPerPlayer",
+      "rules.zoneRadius"
+    ],
+    "allowedActions": [
+      "announce",
+      "notification",
+      "timer.start",
+      "timer.stop",
+      "score.add",
+      "score.reset",
+      "phase.set",
+      "effect.request",
+      "pvp.set",
+      "heal.request"
+    ],
+    "prompt": "Manage rounds, score, timers, announcements, and approved effects."
+  }
+}

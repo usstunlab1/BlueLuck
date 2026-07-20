@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "id": "boss-hunt",
+    "displayName": "Boss Hunt",
+    "version": "1",
+    "enabled": true,
+    "status": "template"
+  },
+  "rules": {
+    "minPlayers": 1,
+    "maxPlayers": 20,
+    "livesPerPlayer": 3,
+    "durationSeconds": 900,
+    "zoneRadius": 90
+  },
+  "flows": {
+    "start": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Boss Hunt is starting."
+        },
+        "approved": true
+      },
+      {
+        "action": "phase.set",
+        "params": {
+          "phase": "hunt"
+        },
+        "approved": true
+      },
+      {
+        "action": "timer.start",
+        "params": {
+          "timerId": "hunt",
+          "seconds": "900"
+        },
+        "approved": true
+      }
+    ],
+    "end": [
+      {
+        "action": "announce",
+        "params": {
+          "message": "Boss Hunt has ended."
+        },
+        "approved": true
+      }
+    ]
+  },
+  "ai": {
+    "enabled": true,
+    "allowConfigEdits": true,
+    "requireApproval": true,
+    "editableFields": [
+      "rules.durationSeconds",
+      "rules.livesPerPlayer",
+      "rules.zoneRadius"
+    ],
+    "allowedActions": [
+      "announce",
+      "notification",
+      "timer.start",
+      "timer.stop",
+      "score.add",
+      "spawn.request",
+      "effect.request",
+      "heal.request",
+      "event.complete"
+    ],
+    "prompt": "Prepare a tracked boss encounter. All spawns and effects require approval."
+  }
+}

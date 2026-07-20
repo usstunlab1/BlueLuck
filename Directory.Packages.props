@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="VampireReferenceAssemblies" Version="1.1.11-r96495-b8" />
+    <PackageVersion Include="BepInEx.Core" Version="6.0.0-be.733" />
+    <PackageVersion Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.733" />
+    <PackageVersion Include="BepInEx.Unity.Common" Version="6.0.0-be.733" />
+  </ItemGroup>
+</Project>

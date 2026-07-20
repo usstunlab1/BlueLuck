@@ -1,0 +1,8 @@
+{
+  "enabled": false,
+  "mode": "plan_only",
+  "provider": "none",
+  "requireStructuredJson": true,
+  "autoExecute": false,
+  "maximumActionsPerPlan": 8
+}
