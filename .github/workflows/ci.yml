@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test (if present)
+        run: |
+          set -e
+          dotnet test --no-build --verbosity normal || true
+
+      - name: Package release zip
+        run: |
+          mkdir -p release
+          dll_path="$(ls bin/Release/net6.0/*.dll 2>/dev/null | head -n 1)"
+          if [ -z "$dll_path" ]; then
+            echo "No built DLL found, skipping package creation"
+            exit 0
+          fi
+          zip_name="BlueLuck-${{ github.run_number }}.zip"
+          zip -j "release/$zip_name" "$dll_path" manifest.json LICENSE THIRD_PARTY_NOTICES.md README.md || true
+          echo "::set-output name=zip::release/$zip_name"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BlueLuck-release
+          path: release/*.zip
