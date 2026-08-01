@@ -14,11 +14,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List repository files
+      - name: Create early debug files
         run: |
-          echo "Workspace: $(pwd)"
-          ls -la
-          ls -la BlueLuck || true
+          echo "RUNNER_OS=${{ runner.os }}" > debug-info.txt
+          echo "GITHUB_RUN_ID=${{ github.run_id }}" >> debug-info.txt
+          echo "GITHUB_SHA=${{ github.sha }}" >> debug-info.txt
+          echo "GITHUB_REF=${{ github.ref }}" >> debug-info.txt
+          echo "Workspace listing:" > debug-ls.txt
+          ls -la >> debug-ls.txt || true
+
+      - name: Upload early debug artifact (verify artifact service)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: early-debug
+          path: |
+            debug-info.txt
+            debug-ls.txt
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
@@ -28,25 +40,29 @@ jobs:
       - name: Dotnet info
         run: dotnet --info
 
-      - name: Restore (diagnostic)
-        run: dotnet restore BlueLuck.csproj -v diag || true
+      - name: Restore
+        run: dotnet restore BlueLuck.csproj
 
-      - name: Build (diagnostic)
+      - name: Build
         run: |
-          dotnet build BlueLuck.csproj --configuration Release --no-restore -v diag > build_output.txt 2>&1 || true
+          dotnet build BlueLuck.csproj --configuration Release --no-restore -v minimal || true
 
-      - name: Upload build log
+      - name: Upload build artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-log
-          path: build_output.txt
+          name: build-artifacts
+          path: |
+            bin/Release/net6.0/*.dll
 
       - name: Test (if present)
-        run: |
-          dotnet test --no-build --verbosity normal > test_output.txt 2>&1 || true
+        run: dotnet test --no-build --verbosity normal || true
 
       - name: Upload test log
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-log
-          path: test_output.txt
+          path: |
+            **/TestResults/**/*.trx
+            test_output.txt
