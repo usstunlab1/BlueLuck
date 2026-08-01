@@ -1,0 +1,10 @@
+{
+  "name": "BlueLuck",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/usstunlab1/BlueLuck",
+  "description": "AI-generated minimal V Rising event framework with ready-to-use events, safe customization, and a curated action runtime.",
+  "dependencies": [
+    "BepInEx-BepInExPack_V_Rising-1.733.2",
+    "deca-VampireCommandFramework-0.10.4"
+  ]
+}
