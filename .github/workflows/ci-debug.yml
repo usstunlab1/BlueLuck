@@ -1,0 +1,45 @@
+name: CI Debug
+on:
+  workflow_dispatch:
+
+jobs:
+  debug-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: List workspace files
+        run: |
+          echo "Workspace root: $(pwd)"
+          ls -la
+          ls -la .github || true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Dotnet info
+        run: dotnet --info
+
+      - name: Restore (verbose)
+        run: dotnet restore -v diag || true
+
+      - name: Build (detailed)
+        run: dotnet build --configuration Release --no-restore -v diag > build_output.txt 2>&1 || true
+
+      - name: Upload build log
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build_output.txt
+
+      - name: Test (if present)
+        run: |
+          dotnet test --no-build --verbosity normal > test_output.txt 2>&1 || true
+      - name: Upload test log
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-log
+          path: test_output.txt
